@@ -1,14 +1,18 @@
 language: node_js
+stages:
+  - name: deploy
+    if: branch = master
 
 node_js:
   - 12
 
-branches:
-  only:
-    - master
+jobs:
+  include:
+    - stage: deploy
+      env:
+        - SURGE_LOGIN=melih193@gmail.com
+        - secure: "AFlBqghZn/XpNK90GwgWBYVDVI59IGASHoDacykiqUdPaJOKzclLEBjjV69ZwPVEIGC1Hbwc52qm3wdv8OGASRjg4QQtZP1sYsnghLUqW3X16uSgELni2Hu874T9Si4jWmqJt//ZWjneZE0QTeEo5fx+d/4dwMK/WpIRbWbPlAC9dPcSp7xMJWSuWFznC5n7y0TCVWJbsJzQ1E8Hyor/KfPFfIsfkdtFV6dQLhhk/6hIVSAlAm1iOV6AeSi6I9Kc1krjkI8dYq3dbbECXGoItd1X/d/ENKYz24nInhdnMhMKd54SsuV8f6X2+jOrQwNhkUgeOZUsqTZELYoM4lqS7UfJKRe7Sj/r68Uk6xwnjGbuEINEgd1AarF70MAF94V6AoeZdVOcOS64MBbZLGwhMkPTqDm5g5XNK6JZv6blVH98oGAkyNx7udm1tYHPXgReG6hW/y6wlPaPEFOUJQ5n6oRkbC20e/bNJX9hHijmAHODiC7RD3s9GPploNzw9rl/H1T8X4sJNN7ji3fwp3pvCPEBoFIFIjyP2Ypl22zs5OD+4R7kSbyvgc8251wIlxZXc866tgqpTgeKuZZ/q+HAwW/YO1MlXKh7J+m1EWEakRfSA62wRBCzxooRBqA/aWZak7KY4R4uj07UF94+kXIKrQenGIrW4cWPP7E7RS1FPy4="
 
-script:
-  - npm run build
-
-after_script:
-  - npm run deploy
+      script:
+        - npm run build
+        - npm run deploy
